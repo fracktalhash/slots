@@ -62,9 +62,11 @@ line_bonus = {
 }
 
 class User:
-    def __init__(self, name: str, bank: float, bet: float):
+    def __init__(self, name: str = 'testuser', password: str = 'password123', bank: float = 100.0, bet: float = 10.00):
 
         self.name = name
+
+        self.password = password
 
         self.bank = bank
 
@@ -217,51 +219,51 @@ def simulate_wins(reels, lines, spins=1000000):
 
     return wins,spins
 
+if __name__ == "__main__":
+    machine0 = Slot(input("Select 'a' for 3x3 or 'b' for 3x4: ") or 'a')
+    player = User(input("Enter your name: ")[:10] or "Player1", float(input("Enter your initial deposit: ") or 100), float(input("How much would you like to bet?: ")or 10))
+    console.print(f"Welcome {player.name}, you have ${player.bank:.2f} in the bank.")
 
-machine0 = Slot(input("Select 'a' for 3x3 or 'b' for 3x4: ") or 'a')
-player = User(input("Enter your name: ")[:10] or "Player1", float(input("Enter your initial deposit: ") or 100), float(input("How much would you like to bet?: ")or 10))
-console.print(f"Welcome {player.name}, you have ${player.bank:.2f} in the bank.")
+
+    first_spin = True
+    while True:
+
+        if player.bank < player.bet:
+            console.print(f"[bold red]You don't have enough money to continue. Game over![/bold red]")
+            player.bet = float(input("How much money would you like to add?: "))
 
 
-first_spin = True
-while True:
-    
-    if player.bank < player.bet:
-        console.print(f"[bold red]You don't have enough money to continue. Game over![/bold red]")
-        player.bet = float(input("How much money would you like to add?: "))
-        
+        prompt = "Please press 'y' to spin, 'b' to change bet 'n' to quit: " if first_spin else "Press 'Enter' to spin again,'b' to change bet or 'n' to quit: "
 
-    prompt = "Please press 'y' to spin, 'b' to change bet 'n' to quit: " if first_spin else "Press 'Enter' to spin again,'b' to change bet or 'n' to quit: "
+        start = input(prompt).strip().lower()
 
-    start = input(prompt).strip().lower()
+        while first_spin and start not in ('y', 'n'):
 
-    while first_spin and start not in ('y', 'n'):
+            console.clear()
 
-        console.clear()
+            console.print(f"[bold blink]{prompt}[/bold blink]")
 
-        console.print(f"[bold blink]{prompt}[/bold blink]")
+            start = input("").strip().lower()
 
-        start = input("").strip().lower()
+        if start == 'y' or (not first_spin and start == ''):
+            result = machine0.spin()
 
-    if start == 'y' or (not first_spin and start == ''):
-        result = machine0.spin()
-        
-        winning_lines = check_wins(result, machine0.lines)
-        player.bank -= player.bet # subtract bet
-        # Animate first
-        spinning(result, winning_lines, machine0.initial_slot_state)
+            winning_lines = check_wins(result, machine0.lines)
+            player.bank -= player.bet # subtract bet
+            # Animate first
+            spinning(result, winning_lines, machine0.initial_slot_state)
 
-        # Then calculate and apply payout
-        payout = calculate_payout(winning_lines, pay_table, line_bonus)
-        
-        player.bank += payout  # add win
+            # Then calculate and apply payout
+            payout = calculate_payout(winning_lines, pay_table, line_bonus)
 
-        first_spin = False
+            player.bank += payout  # add win
 
-    elif start == 'b':
-        player.bet = input("how much money would you like to add?: ")
+            first_spin = False
 
-    elif start == 'n':
-        console.clear()
-        print(f"Thank you for playing!")
-        break
+        elif start == 'b':
+            player.bet = input("how much money would you like to add?: ")
+
+        elif start == 'n':
+            console.clear()
+            print(f"Thank you for playing!")
+            break
