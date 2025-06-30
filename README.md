@@ -7,7 +7,7 @@ A Python-based slot machine game featuring animated spinning reels, symbol-based
 ## 🚀 Project Goals
 
 This game began as a terminal-based Python application and is being expanded to include:
-- 🎮 A graphical game interface (Tkinter or Pygame)
+- 🎮 A graphical game interface Pygame
 - 🔐 Player profile persistence
 - 🌐 Cloud deployment as part of the **Google Cloud Resume Challenge**
 
