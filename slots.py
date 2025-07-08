@@ -1,16 +1,5 @@
-import argparse
 import copy
-from collections import Counter
-from pprint import pformat
-from time import sleep
-#from rich import pretty, print
-from rich.console import Console
-import json
-import time
 import random
-import os
-#pretty.install()
-console = Console()
 
 SYMBOL = ['♥', '♠', 'Δ', 'Ω', 'Ψ', '♝', '♞', '♜', '♛', '♚']
 
