@@ -46,16 +46,6 @@ pay_table = {
 
 line_bonus = {"horizontal": 1.0, "diagonal": 1.5, "zigzag": 2.0}
 
-class User:
-    def __init__(self, name: str = 'testuser', password: str = 'password123', bank: float = 100.0, bet: float = 10.00):
-
-        self.name = name
-
-        self.password = password
-
-        self.bank = bank
-
-        self.bet = bet
 
 class Slot:
 
