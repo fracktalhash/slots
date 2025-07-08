@@ -109,39 +109,57 @@ def input_val(message: str) -> float:
             user_input = input(message3)
 
 
+def main():
+    player = login_in()  # Setts up player object
+    slot = Slot(input("Select 'a' for 3x3 or 'b' for 3x4: ") or "a")  # Setts up the slot's size
+    player.bet = input_val("bet")  # sets Bets
+    first_spin = True  # Starts flag for first spin
 
-        if player.bank < player.bet:
+    while True:  # Spin, bet, play option loop for every spin
+        prompt = (
+            "Please press 'y' to spin, 'b' to change bet 'n' to quit: "
+            if first_spin
+            else "Press 'Enter' to spin again,'b' to change bet or 'n' to quit: "
+        )  # User must confirm with 'y' fist spin other wise they can just hit 'enter'
+
+        if player.bank < player.bet and player.bank != 0.0:  # If the player's bank can cover the bet
+            print("Not enough money for the current bet. Place a new one")
+            player.bet = input_val("bet")  # Ask for a new bet
+        elif player.bank == 0.0:  # If player's bank hits 0 they lose
+            print(f"You spun {player.spin_count} times before losing")
             print("Not enough money. Game over.")
-            break
+            print("User will now be deleted")
 
-        start = input(prompt).strip().lower()
+            break  # Game ends
 
-        while first_spin and start not in ('y', 'n'):
-            wrong_input(prompt)
+        start = input(prompt).strip().lower()  # User input for spins first and Nth
+
+        while first_spin and start not in ("y", "n", "b"):  # Input validation for start var
+            blink_animation(prompt)  # Blink animation for choice emphasis
             start = input("").strip().lower()
 
-        if start == 'y' or (not first_spin and start == ''):
-            result = slot.spin()
-            winning_lines = check_wins(result, slot.lines)
-            player.bank -= player.bet
-            payout = calculate_payout(winning_lines, pay_table, line_bonus, player.bet)
-            
-            animate_spin(result, winning_lines, slot.initial_slot_state, player.bank, payout)
-
-            player.bank += payout
-            first_spin = False
-
-        elif start == 'b':
-            try:
-                new_bet = float(input("New bet amount: "))
-                player.bet = new_bet
-
-            except ValueError:
-                print("Invalid amount.")
-
-        elif start == 'n':
+        if start == "y" or (not first_spin and start == ""):  # Spins the slot machine
+            result = slot.spin()  # Runs the random result generation logic
+            winning_lines = check_wins(result, slot.lines)  # Checks if the user won
+            player.bank -= player.bet  # Subtracts the bet from player's bank
+            payout = calculate_payout(winning_lines, pay_table, line_bonus, player.bet)  # Calculates winnings
+            animate_spin(result, winning_lines, slot.initial_slot_state, player.bank, payout)  # Animation logic
+            player.bank += payout  # Adds winnings
+            player.spin_count += 1  # Increases player's spins
+            player.save()  # Saves changes to database
+            first_spin = False  # Flips flag for first spin
+        elif start == "b":  # Initiates bet changing logic
+            player.bet = input_val("bet")
+            first_spin = True  # First spin Flag is set back to confirm with 'y'
+        elif start == "n":  # Player ends game
             print("Thanks for playing!")
             break
 
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:  # CTRL ends the game gracefully
+        os.system("cls" if os.name == "nt" else "clear")
+        print("Goodbye! Thanks for playing.")
+        sys.exit(0)
