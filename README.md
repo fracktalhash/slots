@@ -1,13 +1,12 @@
 # 🎰 Terminal Slot Machine Game
 
-A Python-based slot machine game featuring animated spinning reels, symbol-based payouts, and line bonuses. Built for the terminal with plans to evolve into a full-featured graphical game.
+A Python-based slot machine game featuring animated spinning reels, symbol-based payouts, and line bonuses.
 
 ---
 
 ## 🚀 Project Goals
 
 This game began as a terminal-based Python application and is being expanded to include:
-- 🎮 A graphical game interface Pygame
 - 🔐 Player profile persistence
 - 🌐 Cloud deployment as part of the **Google Cloud Resume Challenge**
 
@@ -24,20 +23,20 @@ This game began as a terminal-based Python application and is being expanded to 
 
 ---
 
-## 📥 Run It Localy
+## 📥 Run It Locally:
 
 ### Prerequisites
 - Python 3.9+
-- Create a environment (optional but recomended):
-    * Initialize the enviroment:     
-      ```bahs
+- Create a environment (optional but recommended):
+    * Initialize the environment:
+      ```bash
       python3 -m venv venv
       ```
     * Activate in Linux or Mac:
       ```bash
       source env_name/bin/activate
       ```
-    * Acitvate in Windows:
+    * Activate in Windows:
       ```cmd
       .\env_name\Scripts\activate
       ```
@@ -45,10 +44,9 @@ This game began as a terminal-based Python application and is being expanded to 
   ```bash
   pip install rich
   ```
-
 ### Run the game
 ```bash
-python slots.py
+python3 slots.py
 ```
 
 ---
@@ -58,12 +56,6 @@ python slots.py
 ### 1. ✅ Sanitize User Input
 - [ ] Ensure `int`, `float`, and `str` inputs are validated
 - [ ] Add guardrails for bet size, name length, invalid keypresses
-
-### 2. 🎮 Extend to Graphical Window with **Pygame**
-- [ ] Convert console-based board to Pygame sprites
-- [ ] Animate reels with spinning effects
-- [ ] Add mouse interaction & sound
-- [ ] Replace or complement CLI-based input with GUI buttons
 
 ### 3. 🧝 Add Player Profile System
 - [ ] Save/load player name, bank, and bet preferences
@@ -81,13 +73,20 @@ python slots.py
 
 ## 💰 current Pay Table
 
-| Symbol | Match 3 | Match 4 | Bonus Type |
-|--------|---------|---------|-------------|
-| ♥ / ♠  | 2x      | 4x      | —           |
-| Δ / Ω / Ψ | 5x  | 10x     | —           |
-| ♝ / ♞  | 15x     | 30x     | Diagonal +50% |
-| ♜ / ♛  | 50x     | 100x    | Zigzag +100% |
-| ♚      | 100x    | 200x    | Any Line    |
+| Symbol    | Match 3 | Match 4 |
+|-----------|---------|---------|
+| ♥ / ♠     | 2x      | 4x      |
+| Δ / Ω / Ψ | 5x      | 10x     |
+| ♝ / ♞     | 15x     | 30x     |
+| ♜ / ♛     | 50x     | 100x    |
+| ♚         | 100x    | 200x    |
+
+
+| Bonus Line | Bonus Amount  |
+|------------|---------------|
+|  Diagonal  | +50%          |
+|  Zigzag    | + 100%        |
+
 
 ---
 
@@ -115,20 +114,9 @@ The lower the weight, the rarer the symbol — and the bigger the reward.
 
 ---
 
-## 📂 Project Structure
-
-```plaintext
-slots.py             # Main game logic
-templates/           # (Future) HTML for GCP Web App
-static/              # (Future) Assets for UI
-README.md            # This file
-```
-
----
-
 ## 🤝 Contributing
 
-Pull requests are welcome! Suggestions for GUI or GCP integrations are especially appreciated.
+Pull requests are welcome! Suggestions for GCP integrations are especially appreciated.
 
 ---
 
