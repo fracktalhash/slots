@@ -1,22 +1,11 @@
-from slots import Slot, User, check_wins, calculate_payout, pay_table, line_bonus
-from display import animate_spin, display_wins, wrong_input
-from db_setup import login, create_user
+from db_manager import login, create_account, check_username, create_account
+from slots import Slot, check_wins, calculate_payout, pay_table, line_bonus
+from t_display import animate_spin, blink_animation, loading_animation
+from user_manager import User
+import getpass
+import os
+import sys
 
-def main():
-
-    name = input("Username: ")
-    password = input("Password: ")
-    bank = int(input("bank: "))
-    bet = int(input("bet: "))
-    player = User(name=name, bank=bank, bet=bet)
-    slot = Slot(input("Select 'a' for 3x3 or 'b' for 3x4: ") or 'a')
-    first_spin = True
-    # Collect login/creation input
-    #logged_in = login(name, password)
-    #if not logged_in:
-    #    print("Login failed.")
-    #    return
-    #profile, name, bank, spins = logged_in
 
     while True:
         prompt = "Please press 'y' to spin, 'b' to change bet 'n' to quit: " if first_spin else "Press 'Enter' to spin again,'b' to change bet or 'n' to quit: "
