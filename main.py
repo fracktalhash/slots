@@ -7,6 +7,9 @@ import os
 import sys
 
 
+max_deposit = 9_000_000_000_000_000_000  # This value wins the game
+
+
 def login_in() -> User:  # This function creates the player class through user input
     login_prompt = "press '1' to signin '2' to register: "
     user_login = False  # Track the player object creation and user authentication
@@ -83,8 +86,29 @@ def login_in() -> User:  # This function creates the player class through user i
     bank, spin_count = result  # Unpack data for player object
     player = User(user_name, bank, spin_count)  # initialize player
     return player
+
+
+def input_val(message: str) -> float:
+    message1 = f"Place a {message}: "
+    message2 = "Invalid amount. Please enter a value grater than zero: "
+    message2a = "Invalid amount. Please choose a number less than 9 QUADRILLION!!!: "
+    message3 = "That was not a number. Please enter a numeric value: "
+
+    user_input = input(message1)
     while True:
-        prompt = "Please press 'y' to spin, 'b' to change bet 'n' to quit: " if first_spin else "Press 'Enter' to spin again,'b' to change bet or 'n' to quit: "
+        try:
+            new_value = float(user_input)
+            if new_value <= 0:  # Values have to be higher than 0
+                user_input = input(message2)
+            elif new_value > max_deposit:  # Max values for sqlite is 9 quadrillion
+                user_input = input(message2a)
+            else:
+                return new_value
+
+        except ValueError:
+            user_input = input(message3)
+
+
 
         if player.bank < player.bet:
             print("Not enough money. Game over.")
