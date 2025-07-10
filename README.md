@@ -1,7 +1,6 @@
 # 🎰 Terminal Slot Machine Game
 
-A Python-based slot machine game featuring animated spinning reels, symbol-based payouts, and line bonuses.
-
+**A Python-based slot machine game featuring animated spinning reels, symbol-based payouts, and line bonuses.**
 ---
 
 ## 🚀 Project Goals
@@ -117,6 +116,15 @@ The lower the weight, the rarer the symbol — and the bigger the reward.
 ## 🤝 Contributing
 
 Pull requests are welcome! Suggestions for GCP integrations are especially appreciated.
+
+---
+
+## 💬 Credits
+
+This project was developed with:
+- Curiosity and determination
+- Input from family and friends 
+- AI assistance via [ChatGPT](https://chatgpt.com/ ) and [Gemini](https://gemini.google.com/) assistance.
 
 ---
 

@@ -1,0 +1,22 @@
+# Python bytecode
+__pycache__/
+.pytest_cache/
+
+# Virtual environments
+venv/
+
+
+# Editor config
+.vscode/
+.flake8
+cspell.json
+
+# Testing
+.pytest_cache/
+
+# Project-specific files
+users.db
+example.py
+
+# Config files
+*.toml

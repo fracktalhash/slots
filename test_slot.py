@@ -1,6 +1,6 @@
-import random
 from collections import Counter
 from slots import Reel, check_wins, LINES_3x3, LINES_3x4
+import random
 
 
 def simulate_wins(reels, lines, spins=100_000):
